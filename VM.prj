@@ -1,0 +1,50 @@
+
+
+; Micro + software running
+; -----------------------------------------------------
+
+.MICRO     "atmega8" ;
+.TOOLCHAIN "GENERIC"
+.TARGET    "5.hex"  ; Generated externally
+.COFF      "5.cof"  ;    "          "
+.SOURCE    "5.c"  ; CodeVision adds a '__' to the filename
+.STORE 7000m
+.CLOCK 4.0meg
+.POWER VDD = 5 VSS = 0
+
+K0 PB0 VDD LATCHED ; Использовали кнопку "0" на клавиатуре 4х4 в "Контрол пэнел"
+R1 VSS PB0 10K;
+
+K2 PB2 VDD LATCHED ; Использовали кнопку "0" на клавиатуре 4х4 в "Контрол пэнел"
+R2 VSS PB2 10K;
+
+K3 PB3 VDD LATCHED ; Использовали кнопку "0" на клавиатуре 4х4 в "Контрол пэнел"
+R3 VSS PB3 10K;
+
+X1 TTY(19200 8) PD0 PD1  ; терминал
+
+.plot V(PB0) V(PB1) V(PB2) V(PB3) V(PD0) V(PD1)  ; вывод в виртуальных осциллограф
+
+
+; LCD 16 символов 2 строки
+; Parameters are: (characters, lines, oscillator frequency)
+;
+; In the software, it is used the 4 bits interface, to save ports
+; but LCD has 8 bus lines, therefore, the 4 LSB must be connedted to
+; dummy nodes
+;
+;                                                       not connect,
+;                    RS   R/W   E   4 bits interface   arbitrary nodes
+;                    ---  ---  ---  ----------------   ---------------
+;Xdisp LCD(16 2 250K) PD0  PD1  PD2   PD7 PD6 PD5 PD4   nc3 nc2 nc1 nc0
+
+
+
+
+
+
+
+
+
+
+
